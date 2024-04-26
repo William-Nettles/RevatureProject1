@@ -1,12 +1,8 @@
 package com.revature.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,7 +29,6 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Autowired
     public User() {
     }
 
