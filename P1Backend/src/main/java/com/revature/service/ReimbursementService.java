@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReimbursementService {
 
-    ReimbursementDAO reimDao;
+    ReimbursementDAO reimDAO;
 
     @Autowired
     public ReimbursementService() {
