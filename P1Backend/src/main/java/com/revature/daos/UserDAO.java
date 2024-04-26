@@ -1,4 +1,6 @@
 package com.revature.daos;
 
-public interface UserDAO {
-}
+import com.revature.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserDAO extends JpaRepository<User,Integer> {}
