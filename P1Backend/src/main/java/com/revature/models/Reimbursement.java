@@ -26,10 +26,12 @@ public class Reimbursement {
     private User user;
 
     public Reimbursement() {
+        this.status = 0;
+        this.description = "";
+        this.amount = 0;
     }
 
-    public Reimbursement(int reimbId, String description, double amount, int status, User user) {
-        this.reimbId = reimbId;
+    public Reimbursement(String description, double amount, int status, User user) {
         this.description = description;
         this.amount = amount;
         this.status = status;

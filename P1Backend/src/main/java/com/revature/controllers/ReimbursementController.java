@@ -25,19 +25,24 @@ public class ReimbursementController {
         return reimServ.createReimbursement(reimbursement);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Reimbursement>> getAllReimbursements() {
-        return reimServ.getAllReims();
+    @GetMapping("/{userID}")
+    public ResponseEntity<List<Reimbursement>> getAllReimbursements(@PathVariable int userId) {
+        return reimServ.getAllReims(userId);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Reimbursement>> getPendingReimbursements() {
-        return reimServ.getAllPending();
+    @GetMapping("/pending/{userId}")
+    public ResponseEntity<List<Reimbursement>> getPendingReimbursements(@PathVariable int userId) {
+        return reimServ.getAllPending(userId);
     }
 
     @PatchMapping("/{reimId}")
     public ResponseEntity<Object> updateReimbursementStatus(@PathVariable int reimId, @RequestBody int status) {
         return reimServ.updateStatus(reimId, status);
+    }
+
+    @PutMapping("/{reimId}")
+    public  ResponseEntity<Object> uppdateReimbursementDescription(@PathVariable int reimId, @RequestBody String desc) {
+        return reimServ.updateDescription(reimId, desc);
     }
 
 
