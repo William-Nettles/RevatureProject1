@@ -18,6 +18,7 @@ export const Login:React.FC = () => {
 
         //console.log(user.username + user.password)
         //const response = await axios.post("localhost:8080/users", user)
+        
         navigate("/home")
     }
 
