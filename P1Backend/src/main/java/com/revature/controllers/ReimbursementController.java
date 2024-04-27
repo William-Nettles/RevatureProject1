@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.models.Reimbursement;
 import com.revature.service.ReimbursementService;
 import com.revature.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +14,18 @@ import java.util.List;
 public class ReimbursementController {
 
     ReimbursementService reimServ;
-    UserService userServ;
 
-    public ReimbursementController() {
-        reimServ = new ReimbursementService();
-        userServ = new UserService();
+    @Autowired
+    public ReimbursementController(ReimbursementService reimServ) { this.reimServ = reimServ;}
+
+    @PostMapping("/{userId}")
+    public ResponseEntity<Object> createNewReimbursement(@RequestBody Reimbursement reimbursement, @PathVariable int userId) {
+        return reimServ.createReimbursement(reimbursement, userId);
     }
 
-    @PostMapping
-    public ResponseEntity<Object> createNewReimbursement(@RequestBody Reimbursement reimbursement) {
-        return reimServ.createReimbursement(reimbursement);
-    }
-
-    @GetMapping("/{userID}")
-    public ResponseEntity<List<Reimbursement>> getAllReimbursements(@PathVariable int userId) {
-        return reimServ.getAllReims(userId);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Reimbursement>> getAllReimbursements(@PathVariable int id) {
+        return reimServ.getAllReims(id);
     }
 
     @GetMapping("/pending/{userId}")
@@ -41,7 +39,7 @@ public class ReimbursementController {
     }
 
     @PutMapping("/{reimId}")
-    public  ResponseEntity<Object> uppdateReimbursementDescription(@PathVariable int reimId, @RequestBody String desc) {
+    public  ResponseEntity<Object> updateReimbursementDescription(@PathVariable int reimId, @RequestBody String desc) {
         return reimServ.updateDescription(reimId, desc);
     }
 

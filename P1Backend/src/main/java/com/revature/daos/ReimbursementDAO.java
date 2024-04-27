@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ReimbursementDAO extends JpaRepository<Reimbursement,Integer> {
-    List<Reimbursement> findAllByUserId(int userId);
+    List<Reimbursement> findAllByUserUserId(int userId);
+
+    List<Reimbursement> findAllByStatus(int i);
 }

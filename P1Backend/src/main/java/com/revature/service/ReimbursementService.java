@@ -6,35 +6,56 @@ import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ReimbursementService {
 
     ReimbursementDAO reimDAO;
     UserDAO userDAO;
 
     @Autowired
-    public ReimbursementService() {
-
+    public ReimbursementService(ReimbursementDAO reimDAO, UserDAO userDAO) {
+        this.reimDAO=reimDAO;
+        this.userDAO=userDAO;
     }
 
-    public ResponseEntity<Object> createReimbursement(Reimbursement reimbursement) {
+    public ResponseEntity<Object> createReimbursement(Reimbursement reimbursement, int userId) {
+        Optional<User> user = userDAO.findById(userId);
+        if (user.isEmpty())
+            return ResponseEntity.badRequest().body("No user with Id: " + userId);
+        reimbursement.setUser(user.get());
         return ResponseEntity.status(201).body(reimDAO.save(reimbursement));
     }
 
     public ResponseEntity<List<Reimbursement>> getAllReims(int userId) {
         Optional<User> user = userDAO.findById(userId);
-        List<Reimbursement> rb = reimDAO.findAllByUserId(userId);
-        if (user.isEmpty() || user.get().getRole().equals("USER"))
+        List<Reimbursement> rb = reimDAO.findAll();
+        if (user.isPresent() && user.get().getRole().equals("MANAGER"))
             return ResponseEntity.ok().body(rb);
+        else if (user.isPresent() && user.get().getRole().equals("USER")) {
+            final int ID=user.get().getUserId();
+            return ResponseEntity.ok(rb.stream().filter((reim)-> reim.getUser().getUserId()==ID).toList());
+        }
 
-        return ResponseEntity.ok(reimDAO.findAll());
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     public ResponseEntity<List<Reimbursement>> getAllPending(int userId) {
-        return ResponseEntity.ok(reimDAO.findAll().stream().filter((reim)->{return reim.getStatus()==0;}).toList());
+        List<Reimbursement> allPending = reimDAO.findAllByStatus(0);
+        Optional<User> user = userDAO.findById(userId);
+        if (user.isPresent() && user.get().getRole().equals("MANAGER"))
+            return ResponseEntity.ok(allPending);
+        else if (user.isPresent() && user.get().getRole().equals("USER")) {
+            return ResponseEntity.ok(allPending.stream()
+                    .filter((r)->r.getUser().getUserId()==user.get().getUserId()).toList());
+        }
+
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
 

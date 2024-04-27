@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,16 +26,13 @@ public class Reimbursement {
     @JoinColumn(name = "userId")
     private User user;
 
-    public Reimbursement() {
-        this.status = 0;
-        this.description = "";
-        this.amount = 0;
-    }
+    @Autowired
+    public Reimbursement() {}
 
-    public Reimbursement(String description, double amount, int status, User user) {
+    public Reimbursement(String description, double amount, User user) {
         this.description = description;
         this.amount = amount;
-        this.status = status;
+        this.status = 0;
         this.user = user;
     }
 
