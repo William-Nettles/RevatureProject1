@@ -2,17 +2,18 @@ package com.revature.service;
 
 import com.revature.daos.ReimbursementDAO;
 import com.revature.daos.UserDAO;
+import com.revature.models.DTOs.ReimbursementDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.management.BadAttributeValueExpException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ReimbursementService {
 
     ReimbursementDAO reimDAO;
@@ -24,57 +25,96 @@ public class ReimbursementService {
         this.userDAO=userDAO;
     }
 
-    public ResponseEntity<Object> createReimbursement(Reimbursement reimbursement, int userId) {
+    public Reimbursement createReimbursement(ReimbursementDTO reimDTO, int userId) {
+        validateDesc(reimDTO.getDescription());
+        validateAmt(reimDTO.getAmount());
         Optional<User> user = userDAO.findById(userId);
         if (user.isEmpty())
-            return ResponseEntity.badRequest().body("No user with Id: " + userId);
-        reimbursement.setUser(user.get());
-        return ResponseEntity.status(201).body(reimDAO.save(reimbursement));
+            throw new IllegalArgumentException("No user with Id: " + userId);
+        Reimbursement reimbursement = new Reimbursement(
+                reimDTO.getDescription(), reimDTO.getAmount(), user.get());
+
+        return reimDAO.save(reimbursement);
     }
 
-    public ResponseEntity<List<Reimbursement>> getAllReims(int userId) {
+
+
+    public List<Reimbursement> getAllReims(int userId) {
         Optional<User> user = userDAO.findById(userId);
         List<Reimbursement> rb = reimDAO.findAll();
         if (user.isPresent() && user.get().getRole().equals("MANAGER"))
-            return ResponseEntity.ok().body(rb);
+            return rb;
         else if (user.isPresent() && user.get().getRole().equals("USER")) {
             final int ID=user.get().getUserId();
-            return ResponseEntity.ok(rb.stream().filter((reim)-> reim.getUser().getUserId()==ID).toList());
+            return rb.stream().filter((reim)-> reim.getUser().getUserId()==ID).toList();
         }
-
-        return ResponseEntity.ok(new ArrayList<>());
+        return new ArrayList<>();
     }
 
-    public ResponseEntity<List<Reimbursement>> getAllPending(int userId) {
+    public List<Reimbursement> getAllPending(int userId) {
         List<Reimbursement> allPending = reimDAO.findAllByStatus(0);
         Optional<User> user = userDAO.findById(userId);
         if (user.isPresent() && user.get().getRole().equals("MANAGER"))
-            return ResponseEntity.ok(allPending);
+            return allPending;
         else if (user.isPresent() && user.get().getRole().equals("USER")) {
-            return ResponseEntity.ok(allPending.stream()
-                    .filter((r)->r.getUser().getUserId()==user.get().getUserId()).toList());
+            return allPending.stream()
+                    .filter((r)->r.getUser().getUserId()==user.get().getUserId()).toList();
         }
 
-        return ResponseEntity.ok(new ArrayList<>());
+        return new ArrayList<>();
     }
 
 
-    public ResponseEntity<Object> updateStatus(int reimId, int status) {
-        Optional<Reimbursement> rb = reimDAO.findById(reimId);
-        if (rb.isEmpty())
-            return ResponseEntity.badRequest().body("No Reimbursement with Id: " + reimId +" found");
-        Reimbursement reimbursement = rb.get();
+    public Object updateStatus(int reimId, int status) throws IllegalAccessException {
+        validateReimbursement(reimId);
+        validateStatus(status);
+
+        Reimbursement reimbursement = reimDAO.findById(reimId).get();
         reimbursement.setStatus(status);
-        return ResponseEntity.accepted().body(reimDAO.save(reimbursement));
+        return reimDAO.save(reimbursement);
     }
 
-    public ResponseEntity<Object> updateDescription(int reimId, String desc) {
 
+    public Object updateDescription(int reimId, String desc, int userId) throws IllegalAccessException, BadAttributeValueExpException {
+
+        validateReimbursement(reimId);
+        Reimbursement reimbursement = reimDAO.findById(reimId).get();
+
+        validateUser(reimbursement, userId);
+        reimbursement.setDescription(desc);
+
+        return reimDAO.save(reimbursement);
+    }
+
+    ////////////////// ERROR HANDLING METHODS /////////////////////
+
+    private void validateReimbursement(int reimId) throws IllegalAccessException {
         Optional<Reimbursement> rb = reimDAO.findById(reimId);
         if (rb.isEmpty())
-            return ResponseEntity.badRequest().body("No Reimbursement with Id: " + reimId +" found");
-        Reimbursement reimbursement = rb.get();
-        reimbursement.setDescription(desc);
-        return ResponseEntity.accepted().body(reimDAO.save(reimbursement));
+            throw new IllegalArgumentException("No Reimbursement with Id: " + reimId +" found");
     }
+
+    private void validateAmt(double amount) {
+        if (amount <= 0)
+            throw new IllegalArgumentException("Invalid Amount");
+    }
+
+    private void validateDesc(String description) {
+        if (description.length() > 256)
+            throw new IllegalArgumentException("Description is too long");
+        if (description.isBlank())
+            throw new IllegalArgumentException("Please provide a description");
+    }
+
+    private void validateStatus(int status) {
+        if (status < 0 || status >2)
+            throw new IllegalArgumentException("Invalid Status");
+    }
+
+    private void validateUser(Reimbursement reimbursement, int userId) throws BadAttributeValueExpException {
+        if (reimbursement.getUser().getUserId() != userId)
+            throw new BadAttributeValueExpException("This reimbursement does not belong to you.");
+    }
+
+
 }
