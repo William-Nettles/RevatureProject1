@@ -13,7 +13,7 @@ public class Reimbursement {
     @Id
     private int reimbId;
 
-    @Column
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -29,10 +29,10 @@ public class Reimbursement {
     @Autowired
     public Reimbursement() {}
 
-    public Reimbursement(String description, double amount, User user) {
+    public Reimbursement(String description, double amount, int status, User user) {
         this.description = description;
         this.amount = amount;
-        this.status = 0;
+        this.status = status;
         this.user = user;
     }
 

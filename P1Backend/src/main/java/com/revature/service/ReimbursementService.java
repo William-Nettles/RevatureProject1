@@ -32,7 +32,7 @@ public class ReimbursementService {
         if (user.isEmpty())
             throw new IllegalArgumentException("No user with Id: " + userId);
         Reimbursement reimbursement = new Reimbursement(
-                reimDTO.getDescription(), reimDTO.getAmount(), user.get());
+                reimDTO.getDescription(), reimDTO.getAmount(), 0, user.get());
 
         return reimDAO.save(reimbursement);
     }
