@@ -8,19 +8,13 @@ export const NewReim:React.FC = () => {
     const navigate = useNavigate()
 
     const[reim,setReim] = useState<ReimbursementInterface>({
-        status:0,
         amount:0,
-        userId:0,
         description:"",
     })
 
     const storeValues = (input:any) => {
 
-        if(input.target.name === "reimname") {
-            setReim((reim) => ({...reim, reimname:input.target.value}))
-        } else if (input.target.name === "password") {
-            setReim((reim) => ({...reim, password:input.target.value}))
-        } else if (input.target.name === "amount") {
+        if (input.target.name === "amount") {
             setReim((reim) => ({...reim, amount:input.target.value}))
         } else {
             setReim((reim) => ({...reim, description:input.target.value}))
