@@ -5,6 +5,8 @@ import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
 import { error } from "console"
 import { spawn } from "child_process"
 
+//component for creating a new reimbursement
+
 export const NewReim:React.FC = () => {
 
     const navigate = useNavigate()

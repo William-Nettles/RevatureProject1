@@ -1,3 +1,7 @@
+//will display all reimbursements to the user
+//employees can only see their own reimbursements
+//managers can see all reimbursements
+
 import { useNavigate } from "react-router-dom"
 
 export const AllReims:React.FC = ()=>{

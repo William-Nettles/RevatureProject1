@@ -1,8 +1,13 @@
 import { useState } from "react"
 import { UserInterface } from "../../interfaces/UserInterface"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+//For displaying users to a Manager, will allow them to promote employees, fire employees, and view an naviagte to reimbursements
 
 export const User: React.FC<UserInterface> = (userState:UserInterface) => {
+
+    const navigate = useNavigate()
 
     const [checkbox, setCheck] = useState(false)
     const check = () => {
@@ -18,7 +23,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
         setCheck(!checkbox)
     }
 
-    //this will render a view for the character coming in as props
+    //this will render a view for the employee coming in as props
     return (
         <div className="user-container">
             <div className="user-id">
@@ -32,11 +37,20 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                 <div>
                     <span>Role: {user.role}</span> 
 
-                    {user.role === "USER" && <><span> | Promote </span>
+                    {user.role === "USER" && <div><span> | Promote </span>
                     <input type="checkbox" id="option1" name="options" value="option1"
-                        onChange={check} /></>}
+                        onChange={check} />
 
                     {checkbox && <button className="button" onClick={changeRole}>Confirm</button>}
+                    <div>
+                        <button className="button" onClick={()=>{navigate("/reimbursements")}}>View Reimbursements</button>
+                    </div>
+                    <div>
+                        <button className="button" onClick={()=>{}}>Fire</button>
+                    </div>
+
+                    </div>}
+
                     
                 </div>
                 

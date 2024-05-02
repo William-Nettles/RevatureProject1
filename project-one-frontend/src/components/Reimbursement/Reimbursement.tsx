@@ -1,3 +1,5 @@
+//This component displays a reimbursement, child component of the reimbursement container
+
 export const Reimbursement: React.FC<any> = (reimbursement:any) => {
 
 

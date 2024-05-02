@@ -3,6 +3,9 @@ import { UserInterface } from "../../interfaces/UserInterface"
 import { useState } from "react"
 import axios from "axios"
 
+//for account creation
+//users can create an account or navigate back to login
+
 export const Register:React.FC = () => {
 
     const navigate = useNavigate()

@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
+//allows users to navigate to components for creating and viewing reimbursements
+
 export const Reimbursements:React.FC = () => {
 
     const navigate = useNavigate()

@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom"
 
+//view all pending reimbursements
+//managers can see all pening
+//employees can only see their own
+
 export const Pending:React.FC = ()=>{
 
     const navigate = useNavigate()

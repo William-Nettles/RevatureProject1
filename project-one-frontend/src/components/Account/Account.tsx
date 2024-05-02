@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
 
+
+//component to display a user's account
+//A manager can use this page to view employees as well
+
 export const Account:React.FC = ()=>{
 
     const navigate = useNavigate()

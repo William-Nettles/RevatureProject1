@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom"
 
+//Home page
+//Users can navigate to their account, sign out, or navigate to reimbursements portal
+
 export const Home:React.FC = () => {
 
     const navigate = useNavigate()

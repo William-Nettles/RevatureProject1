@@ -4,5 +4,5 @@ export interface UserInterface {
     password?:string,
     firstName?:string,
     lastName?:string,
-    role:string
+    role?:string
 }

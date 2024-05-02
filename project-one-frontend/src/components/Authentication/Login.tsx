@@ -2,13 +2,13 @@ import axios from "axios"
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
+import { state } from "../../globalData/store"
+
+//component for login. Users can login or navigate to signup
 
 export const Login:React.FC = () => {
 
     const[user,setUser] = useState<UserInterface>({
-        role:"",
-        firstName:"",
-        lastName:"",
         username:"",
         password:""
     })
@@ -17,9 +17,17 @@ export const Login:React.FC = () => {
     const login = async () => {
 
         //console.log(user.username + user.password)
-        //const response = await axios.post("localhost:8080/users", user)
-        
-        navigate("/home")
+        const response = await axios.post("localhost:8080/users", user,
+            {withCredentials:true}
+        ).then((response)=> {
+            console.log(response.data)
+            state.userSessionData = response.data
+            alert(state.userSessionData.username + " logged in successfully")
+            navigate("/home")
+        }).catch(()=>{
+            alert("Login failed")
+            console.error();           
+        })  
     }
 
     const storeValues = (input:any) => {
