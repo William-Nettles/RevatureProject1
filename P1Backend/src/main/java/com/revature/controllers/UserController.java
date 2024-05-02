@@ -1,9 +1,13 @@
 package com.revature.controllers;
 
 import com.revature.daos.ReimbursementDAO;
+import com.revature.models.DTOs.IncomingUserDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
+import com.revature.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.revature.daos.UserDAO;
@@ -16,34 +20,76 @@ import java.util.Optional;
 @CrossOrigin
 public class UserController {
 
-    UserDAO userDAO;
+    UserService userService;
+    UserDAO userDAO; // Inject UserDAO
+
 
     @Autowired
-    public UserController(UserDAO userDAO){
-        this.userDAO =userDAO;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.status(201).body(userDAO.save(user));
+    public ResponseEntity<String> createUser(@RequestBody IncomingUserDTO userDTO) {
+
+        try{
+            userService.createUser(userDTO);
+            return ResponseEntity.status(201).body(userDTO.getUsername() + " was created");
+        }catch(IllegalArgumentException e){
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User>users = userDAO.findAll();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<?> getAllUsers(HttpSession session){
+        if (session.getAttribute((String) session.getAttribute("role")).equals("USER")) {
+            return ResponseEntity.status(401).body("You must be logged in as a manager to look up users");
+        }
+
+        int userId = (int)session.getAttribute("userId");
+
+        return ResponseEntity.ok(userService.getAllUser(userId));
     }
+
 
     @DeleteMapping("/userId")
-    public ResponseEntity<Object> deleteUser(@PathVariable int userId){
-        Optional<User> u = userDAO.findById(userId);
+    public ResponseEntity<String>deleteUser(@PathVariable int userId, HttpSession session){
+       String userRole =(String) session.getAttribute("role");
 
-        if(u.isEmpty()){
-            return ResponseEntity.status(404).body("UserId not found");
+        // Check if user is a manager
+        if (!"MANAGER".equals(userRole)) {
+            return ResponseEntity.status(401).body("You must be logged in as a manager to delete users");
         }
-        User user = u.get();
-        userDAO.deleteById(userId);
 
-        return ResponseEntity.accepted().body("user deleted");
+        //get user to be deleted
+        Optional<User> userOptional = userDAO.findById(userId);
+        if(userOptional.isEmpty()){
+            return ResponseEntity.status(404).body("user not found");
+        }
+        User u = userOptional.get();
+        String userOut = u.getRole();
+
+        //A manager should NOT be able to delete another mananger
+        if("MANAGER".equals(userOut)){
+            return ResponseEntity.status(403).body("You cannot delete a MANAGER");
+        }
+        try{
+            userDAO.deleteById(userId);
+            return ResponseEntity.accepted().body("User deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Failed to delete user");
+        }
     }
+
+//    public ResponseEntity<Object> deleteUser(@PathVariable int userId){
+//        Optional<User> u = userDAO.findById(userId);
+//
+//        if(u.isEmpty()){
+//            return ResponseEntity.status(404).body("UserId not found");
+//        }
+//        User user = u.get();
+//        userDAO.deleteById(userId);
+//
+//        return ResponseEntity.accepted().body("user deleted");
+//    }
 }
