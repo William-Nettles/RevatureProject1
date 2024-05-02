@@ -1,42 +1,25 @@
-package com.revature.models;
+package com.revature.models.DTOs;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
-import org.springframework.stereotype.Component;
+public class OutgoingUserDTO {
 
-@Component
-@Entity
-@Table(name="users")
-public class User {
-
-    @Id
-    @GeneratedValue
     private int userId;
-
-    @Column
     private String firstName;
-
-    @Column
     private String lastName;
-
-    @Column(nullable = false)
     private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
     private String role;
 
-    public User(String username, String password) {
-    }
 
-    public User(String firstName, String lastName, String username, String password, String role) {
+    public OutgoingUserDTO(int userId, String firstName, String lastName, String username, String role) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        this.password = password;
         this.role = role;
+    }
+
+    public OutgoingUserDTO() {
     }
 
     public int getUserId() {
@@ -71,14 +54,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
@@ -89,12 +64,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "OutgoingUserDTO{" +
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
