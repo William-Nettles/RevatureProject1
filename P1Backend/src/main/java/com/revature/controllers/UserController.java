@@ -81,15 +81,24 @@ public class UserController {
         }
     }
 
-//    public ResponseEntity<Object> deleteUser(@PathVariable int userId){
-//        Optional<User> u = userDAO.findById(userId);
-//
-//        if(u.isEmpty()){
-//            return ResponseEntity.status(404).body("UserId not found");
-//        }
-//        User user = u.get();
-//        userDAO.deleteById(userId);
-//
-//        return ResponseEntity.accepted().body("user deleted");
-//    }
+    @PutMapping("/{userId}")
+    public ResponseEntity<String> updateUserRole(@PathVariable int userId, @RequestBody String newRole, HttpSession session) {
+        String userRole = (String) session.getAttribute("role");
+
+        // Check if user is a manager
+        if (!"MANAGER".equals(userRole)) {
+            return ResponseEntity.status(401).body("You must be logged in as a manager to update user roles");
+        }
+
+        if(!"MANAGER".equals(newRole)){
+            return ResponseEntity.status(400).body("Invalid role:" + newRole + " .Only 'MANAGER' role can be assigned.");
+        }
+
+        try{
+            userService.updateUserRole(userId,newRole);
+            return ResponseEntity.ok().body( userId + " Promoted successfully");
+        }catch (Exception e) {
+            return ResponseEntity.status(500).body("Failed to Update user");
+        }
+    }
 }

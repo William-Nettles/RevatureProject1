@@ -82,5 +82,21 @@ public class UserService {
         return ResponseEntity.accepted().body("user deleted");
     }
 
+     public void updateUserRole(int userId, String newRole){
+
+        Optional<User>oUser =  userDAO.findById(userId);
+         if(oUser.isEmpty()){
+             throw new IllegalArgumentException("User " + userId + " not found!");
+         }
+         User user = oUser.get();
+
+         //MANAGER check
+         if (!"MANAGER".equals(newRole)) {
+             throw new IllegalArgumentException("Invalid role: " + newRole + ". Only 'MANAGER' role can be assigned.");
+         }
+         user.setRole(newRole);
+         userDAO.save(user);
+     }
+
 
 }
