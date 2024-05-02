@@ -52,7 +52,7 @@ public class ReimbursementService {
     }
 
     public List<Reimbursement> getAllPending(int userId) {
-        List<Reimbursement> allPending = reimDAO.findAllByStatus(0);
+        List<Reimbursement> allPending = reimDAO.findByStatus(0);
         Optional<User> user = userDAO.findById(userId);
         if (user.isPresent() && user.get().getRole().equals("MANAGER"))
             return allPending;

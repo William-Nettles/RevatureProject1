@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface UserDAO extends JpaRepository<User,Integer> {
 
-    public List<User> findByUserUserId(int userId);
-    public Optional<User> FindByUserId(int userId);
+    //public List<User> findByUserUserId(int userId);
+    //public Optional<User> FindByUserId(int userId);
 }
