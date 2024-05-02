@@ -16,18 +16,19 @@ export const Login:React.FC = () => {
     const navigate = useNavigate()
     const login = async () => {
 
-        //console.log(user.username + user.password)
-        const response = await axios.post("localhost:8080/users", user,
+        console.log(user.username + user.password)
+        const response = await axios.post("http://localhost:8080/users/login", user,
             {withCredentials:true}
         ).then((response)=> {
             console.log(response.data)
             state.userSessionData = response.data
             alert(state.userSessionData.username + " logged in successfully")
             navigate("/home")
-        }).catch(()=>{
+        }).catch((response)=>{
+            console.log(response.data)
             alert("Login failed")
             console.error();           
-        })  
+        })   
     }
 
     const storeValues = (input:any) => {

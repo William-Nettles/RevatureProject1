@@ -52,7 +52,7 @@ public class ReimbursementController {
 
     @PutMapping("/status/{reimId}")
     public ResponseEntity<Object> updateReimbursementStatus(@PathVariable int reimId, @RequestBody int status, HttpSession session) {
-        if (session.getAttribute((String) session.getAttribute("role")).equals("USER"))
+        if (((String) session.getAttribute("role")).equals("USER"))
             return ResponseEntity.status(401).body("You must be logged in as a manager to change status");
         try {
             return ResponseEntity.accepted().body(reimServ.updateStatus(reimId, status));
@@ -63,8 +63,7 @@ public class ReimbursementController {
 
     @PutMapping("/description/{reimId}")
     public  ResponseEntity<Object> updateReimbursementDescription(@PathVariable int reimId, @RequestBody String desc, HttpSession session) {
-        if (session.getAttribute((String) session.getAttribute("role")).equals("USER"))
-            return ResponseEntity.status(401).body("You must be logged in as a manager to change status");
+
         try {
             return ResponseEntity.accepted().body(reimServ.updateDescription(reimId, desc, (int) session.getAttribute("userId")));
         } catch (Exception e) {

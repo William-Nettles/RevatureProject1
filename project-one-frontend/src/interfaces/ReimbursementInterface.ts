@@ -1,5 +1,5 @@
 export interface ReimbursementInterface {
-    reimId?:number,
+    reimbId?:number,
     status?:number,
     userId?:number,
     amount:number,

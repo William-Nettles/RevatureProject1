@@ -4,6 +4,7 @@ import axios from "axios"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
 import { error } from "console"
 import { spawn } from "child_process"
+import { NavPanel } from "./NavPanel"
 
 //component for creating a new reimbursement
 
@@ -34,15 +35,14 @@ export const NewReim:React.FC = () => {
        
         if (reim.description && reim.description?.length > 0 && reim.amount > 0) {
             //console.log('hello')
-            //const response = await axios.post("http://localhost:8080/reimbursements",
-            //reim,
-            //{withCredentials:true})
+            const response = await axios.post("http://localhost:8080/reimbursements",
+            reim,
+            {withCredentials:true}).then((response)=>{
+                console.log(response.data)
+                setMessage("Reimbursement Successfully Created")
+                //navigate("/reimbursements/new")
+            }).catch((error)=>{alert(error)})
 
-            //console.log(response)
-            const response = "Reimbursement Successfully Created"
-
-            navigate("/reimbursements/new")
-            setMessage(response)
         } else {
             console.log("bad input")
             setMessage("Invalid Input")
@@ -53,6 +53,7 @@ export const NewReim:React.FC = () => {
     return(
         <div>
              <h2>Reimbursement Portal</h2>
+             <NavPanel/>
              <h3>New Reimbursement</h3>
             <div>
                 <p>Amount:</p>

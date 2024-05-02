@@ -1,22 +1,35 @@
 import { useEffect, useState } from "react"
 import { Reimbursement } from "./Reimbursement"
+import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
+import axios from "axios"
 
-export const ReimbursementContainer: React.FC<any> = (incomingData:any) => {
+export const ReimbursementContainer: React.FC<any> = (incomingEndpoint:string) => {
 
     //State variable to store an array of employee data (whihc will be sent in as props)
-    const[reimbursements, setReimbursements] = useState([])
+    const[reimbursements, setReimbursements] = useState<ReimbursementInterface[]>([])
+    const[endpoint, setEndpoint] = useState<string>("")
 
     //useEffect that populates the employees array with incoming employee data
     //(This emulates a get all that happens on the component render... view all reimbs for instance)
-    useEffect(() => {
-        //we will set the employee state object to the Array found in the employeeData.ts
-        setReimbursements(incomingData.incomingData)
 
-        //yes we could have just set this as default state... useState(incomingData.data)
+    useEffect(()=>{getReimbursements()},[])
 
-        //just so we can see the incoming data
-        console.log(reimbursements)
-    }, [reimbursements, incomingData])
+    const getReimbursements = async () => {
+
+        setEndpoint(incomingEndpoint)
+
+        //our GET request (remember to send withCredentials to confirm the user is logged in)
+        const response = await axios.get("http://localhost:8080/reimbursements" + endpoint, {withCredentials:true}).then((response)=>{
+            console.log(response.data)
+            setReimbursements(response.data)
+
+        }).catch((error)=>{console.log(error);
+        })
+
+        //populate the reimbursement state  
+        
+    }
+
 
     return(
         <div>

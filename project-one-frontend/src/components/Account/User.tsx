@@ -31,7 +31,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
             </div>
 
             <div className="employee-data">
-                <p>Usaer Id: {user.userId}</p>
+                <p>User Id: {user.userId}</p>
                 <p>Username: {user.username}</p>
                 <p>Name: {user.firstName} {user.lastName}</p>
                 <div>

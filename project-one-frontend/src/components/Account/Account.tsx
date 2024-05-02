@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
+import { state } from "../../globalData/store"
+import axios from "axios"
+import { error } from "console"
 
 
 //component to display a user's account
@@ -11,20 +14,31 @@ export const Account:React.FC = ()=>{
 
     const navigate = useNavigate()
     const [user, setUser] = useState<UserInterface>({
-        username:"willnettles",
-        role:"MANAGER",
-        userId:2,
-        firstName:"William",
-        lastName:"Nettles"
+        username:state.userSessionData.username,
+        role:state.userSessionData.role,
+        userId:state.userSessionData.userId,
+        firstName:state.userSessionData.firstName,
+        lastName:state.userSessionData.lastName
     })
 
-    const [userTemp, setUserTemp] = useState<UserInterface>({
-            username:"willnettles",
-            role:"USER",
-            userId:2,
-            firstName:"William",
-            lastName:"Nettles"
-    })
+    const [userTemp, setUserTemp] = useState<UserInterface[]>([])
+
+    useEffect(()=>{getAllUsers()},[])
+
+    const getAllUsers = async () => {
+
+        //our GET request (remember to send withCredentials to confirm the user is logged in)
+        const response = await axios.get("http://localhost:8080/users", {withCredentials:true}).then((response)=>{
+            setUser(response.data)
+            console.log(response.data)
+        }).catch((error)=>{console.log(error);
+        })
+
+        //populate the user state  
+        
+
+        
+    }
 
     
     return(
@@ -41,7 +55,12 @@ export const Account:React.FC = ()=>{
         </div>
         {user.role==="MANAGER" && <div>
             <h2>All Users:</h2>
-            <User {...userTemp}/>
+            {userTemp.map((user, index) =>  <div>
+                <User {...user}/>
+            </div>
+        )}
+           
+            
             
             
         </div>}
