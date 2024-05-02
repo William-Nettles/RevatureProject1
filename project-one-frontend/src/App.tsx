@@ -8,6 +8,7 @@ import { Home } from './components/Home/Home';
 import { Reimbursements } from './components/ReimbursementPortal/ReimPortal';
 import { AllReims } from './components/ReimbursementPortal/AllReims';
 import { Pending } from './components/ReimbursementPortal/Pending';
+import { Account } from './components/Account/Account';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='reimbursements/new' element={<NewReim/>}/>
           <Route path='/reimbursements' element={<Reimbursements/>}/>
-          <Route path='reimbursements/all' element={<AllReims/>}/>
-          <Route path='reimbursements/pending' element={<Pending/>}/>
+          <Route path='/reimbursements/all' element={<AllReims/>}/>
+          <Route path='/reimbursements/pending' element={<Pending/>}/>
+          <Route path='/account' element={<Account/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
+import { error } from "console"
+import { spawn } from "child_process"
 
 export const NewReim:React.FC = () => {
 
@@ -12,10 +14,14 @@ export const NewReim:React.FC = () => {
         description:"",
     })
 
+    const[responseMessage, setMessage] = useState("")
+
     const storeValues = (input:any) => {
 
         if (input.target.name === "amount") {
             setReim((reim) => ({...reim, amount:input.target.value}))
+            
+            
         } else {
             setReim((reim) => ({...reim, description:input.target.value}))
         }
@@ -24,12 +30,22 @@ export const NewReim:React.FC = () => {
 
      const submit = async ()=> {
        
-        const response = await axios.post("http://localhost:8080/reimbursements", reim)
+        if (reim.description && reim.description?.length > 0 && reim.amount > 0) {
+            //console.log('hello')
+            //const response = await axios.post("http://localhost:8080/reimbursements",
+            //reim,
+            //{withCredentials:true})
 
-        
+            //console.log(response)
+            const response = "Reimbursement Successfully Created"
 
-        //after registration, send reim back to login page
-        navigate("/reimbursements/new")
+            navigate("/reimbursements/new")
+            setMessage(response)
+        } else {
+            console.log("bad input")
+            setMessage("Invalid Input")
+        }
+          
     }
 
     return(
@@ -39,16 +55,19 @@ export const NewReim:React.FC = () => {
             <div>
                 <p>Amount:</p>
                 <input type="number" name="amount" onChange={storeValues}/>
+                {reim.amount<=0 && (<span className="error"> Value must be greater than zero</span>)}
             </div>
              <div>
                 <p>Description:</p>
                 <input type="text" placeholder="description" name="description" onChange={storeValues}/>
+                {!reim.description && (<span className="error"> Please provide a description</span>)}
             </div>
             
 
             <div>
                 <button className="button" onClick={submit}>Submit</button>
                 <button className="button" onClick={()=> {navigate("/reimbursements")}}>Back</button>
+                {responseMessage && <span> {responseMessage}</span>}
             </div>
         </div>
     )
