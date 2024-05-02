@@ -99,4 +99,12 @@ public class UserService {
      }
 
 
+    public Optional<User> loginUser(IncomingUserDTO userDTO) throws IllegalArgumentException {
+
+        //TODO: validity checks
+
+        //if all checks pass, return a User OR null, and send it to the controller
+        return userDAO.findByUsernameAndPassword(userDTO.getUsername(), userDTO.getPassword());
+
+    }
 }

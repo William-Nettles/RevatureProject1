@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import com.revature.daos.ReimbursementDAO;
 import com.revature.models.DTOs.IncomingUserDTO;
+import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.UserService;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
     UserService userService;
@@ -28,6 +29,34 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody IncomingUserDTO userDTO, HttpSession session){
+
+        //Get the User object from the service (which talks to the DB)
+        Optional<User> optionalUser = userService.loginUser(userDTO);
+
+        //If login fails (which will return an empty optional), tell the user they failed
+        if(optionalUser.isEmpty()){
+            return ResponseEntity.status(401).body("Login Failed!");
+        }
+
+        //If login succeeds store the user info in our session
+        User u = optionalUser.get();
+
+        //Storing the user info in our session
+        session.setAttribute("userId", u.getUserId());
+        session.setAttribute("username", u.getUsername()); //probably won't use this
+        //role save to session
+        session.setAttribute("role", u.getRole());
+
+        //Finally, send back a 200 (OK) as well as a OutgoingUserDTO
+        return ResponseEntity.ok(new OutgoingUserDTO(
+                u.getUserId(), u.getFirstName(), u.getLastName(), u.getUsername(), u.getRole()));
+
+    }
+
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody IncomingUserDTO userDTO) {
