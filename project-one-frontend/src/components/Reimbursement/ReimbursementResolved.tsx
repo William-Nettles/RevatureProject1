@@ -5,7 +5,7 @@ import { useState } from "react"
 import { state } from "../../globalData/store"
 import { useNavigate } from "react-router-dom"
 
-export const Reimbursement: React.FC<any> = (reimbursement:any) => {
+export const ReimbursementResolved: React.FC<any> = (reimbursement:any) => {
 
 
     const [reimStatus, setStatus] = useState(reimbursement.status)
@@ -27,6 +27,7 @@ export const Reimbursement: React.FC<any> = (reimbursement:any) => {
     }
     const deny = async () => {
 
+       
         const response = await axios.put("http://localhost:8080/reimbursements/status/" + reimbursement.reimbId, 2,
             {withCredentials: true, headers: {"Content-Type": "application/json",},})
             .then((response)=>{
@@ -39,26 +40,20 @@ export const Reimbursement: React.FC<any> = (reimbursement:any) => {
     //this will render a view for the character coming in as props
     return (
         <div className="reimbursement-container">
-            {reimStatus === 0 && <div>  
+            
                 <div className="reimbursement-id">
                     <h3>ID: {reimbursement.reimbId}</h3>
                 </div>
 
                 <div className="employee-data">
-                    <p>User: {reimbursement.user.username}</p>
                     <p>
                         Status: {status.get(reimStatus)} 
-                        {state.userSessionData.role === "MANAGER" && 
-                        <>
-                        <button className="button" onClick={() => { approve() } }>Approve</button>
-                        <button className="button" onClick={() => { deny() } }>Deny</button>
-                        </> 
-                        }
+                        
                     </p>
                     <p>Amount: {reimbursement.amount}</p>
                     <p>Description: {reimbursement.description}</p>
                 </div>
-            </div>}
+            
         </div>
     )
 }

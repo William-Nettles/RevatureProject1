@@ -69,7 +69,6 @@ export const NewReim:React.FC = () => {
 
             <div>
                 <button className="button" onClick={submit}>Submit</button>
-                <button className="button" onClick={()=> {navigate("/reimbursements")}}>Back</button>
                 {responseMessage && <span> {responseMessage}</span>}
             </div>
         </div>
