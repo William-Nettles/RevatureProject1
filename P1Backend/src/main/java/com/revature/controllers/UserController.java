@@ -59,6 +59,16 @@ public class UserController {
 
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+
+        session.setAttribute("userId", 0);
+        session.setAttribute("username", "");
+        session.setAttribute("role", "");
+
+        return ResponseEntity.ok("User successfully logged out");
+    }
+
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody SignUpUserDTO userDTO) {

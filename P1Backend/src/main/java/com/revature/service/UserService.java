@@ -40,7 +40,11 @@ public class UserService {
             throw new IllegalArgumentException("Username cannot be JavaScript");
         }
 
-        User newU = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName());
+        if (userDAO.findByUsername(userDTO.getUsername()).isPresent()){
+            throw new IllegalArgumentException("Username already exists");
+        }
+
+        User newU = new User( userDTO.getFirstName(), userDTO.getLastName(),userDTO.getUsername(), userDTO.getPassword());
 
         return userDAO.save(newU);
 

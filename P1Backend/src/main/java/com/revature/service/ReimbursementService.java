@@ -78,6 +78,7 @@ public class ReimbursementService {
     public Object updateDescription(int reimId, String desc, int userId) throws IllegalAccessException, BadAttributeValueExpException {
 
         validateReimbursement(reimId);
+        validateDesc(desc);
         Reimbursement reimbursement = reimDAO.findById(reimId).get();
 
         validateUser(reimbursement, userId);
@@ -100,7 +101,7 @@ public class ReimbursementService {
     }
 
     private void validateDesc(String description) {
-        if (description.length() > 256)
+        if (description.length() > 100)
             throw new IllegalArgumentException("Description is too long");
         if (description.isBlank())
             throw new IllegalArgumentException("Please provide a description");

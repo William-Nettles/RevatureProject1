@@ -46,6 +46,7 @@ export const ReimbursementResolved: React.FC<any> = (reimbursement:any) => {
                 </div>
 
                 <div className="employee-data">
+                     <p>User: {reimbursement.user.username}</p>
                     <p>
                         Status: {status.get(reimStatus)} 
                         
