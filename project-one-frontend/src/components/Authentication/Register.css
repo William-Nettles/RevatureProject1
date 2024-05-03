@@ -1,0 +1,82 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* Create account form container (register component) */
+.register {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    /* Adjust width as needed */
+}
+
+/* Form labels and inputs */
+.register div {
+    margin-bottom: 15px;
+}
+
+.register p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style all input fields */
+.register input[type="text"],
+.register input[type="password"] {
+    width: 100%;
+    /* Full width for all inputs */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Buttons side-by-side */
+.register-buttons {
+    display: flex;
+    /* Make buttons container a flexbox */
+    justify-content: space-between;
+    /* Distribute buttons horizontally */
+    margin-top: 10px;
+    /* Add margin after input fields */
+}
+
+.register-button {
+    width: calc(50% - 5px);
+    /* Adjust width for side-by-side buttons with space between them */
+    padding: 10px;
+    background-color: #000;
+    /* Black background color */
+    border: none;
+    border-radius: 9px;
+    /* Make buttons rounded */
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    /* White text color */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+/* Adjust margin between buttons */
+.register-button:first-child {
+    margin-right: 5px;
+}
+
+.register-button:last-child {
+    margin-left: 5px;
+}
+.register-button:hover {
+    background-color: #666;
+    /* Grey background color on hover */
+}
