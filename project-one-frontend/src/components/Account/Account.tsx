@@ -76,7 +76,7 @@ export const Account:React.FC = ()=>{
 
         <div>
 
-            <div className="user-container">
+            <div className="users-container">
 
             
             {state.userSessionData.role==="MANAGER" && <div className="manager-view">
