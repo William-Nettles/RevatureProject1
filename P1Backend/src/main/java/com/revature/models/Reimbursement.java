@@ -22,7 +22,7 @@ public class Reimbursement {
     @Column(nullable = false)
     private int status;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
 

@@ -9,6 +9,7 @@ import { state } from "../../globalData/store"
 export const Login:React.FC = () => {
 
     const[user,setUser] = useState<UserInterface>({
+        userId:0,
         username:"",
         password:""
     })

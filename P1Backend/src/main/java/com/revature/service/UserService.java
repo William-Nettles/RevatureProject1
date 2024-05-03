@@ -3,6 +3,7 @@ package com.revature.service;
 import com.revature.daos.UserDAO;
 import com.revature.models.DTOs.IncomingUserDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
+import com.revature.models.DTOs.SignUpUserDTO;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserService {
 
 
     //createUser
-    public User createUser(IncomingUserDTO userDTO) throws IllegalArgumentException {
+    public User createUser(SignUpUserDTO userDTO) throws IllegalArgumentException {
 
         if (userDTO.getUsername().isBlank() || userDTO.getUsername() == null) {
             throw new IllegalArgumentException("Username cannot be empty");
@@ -39,7 +40,7 @@ public class UserService {
             throw new IllegalArgumentException("Username cannot be JavaScript");
         }
 
-        User newU = new User(userDTO.getUsername(), userDTO.getPassword());
+        User newU = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName());
 
         return userDAO.save(newU);
 

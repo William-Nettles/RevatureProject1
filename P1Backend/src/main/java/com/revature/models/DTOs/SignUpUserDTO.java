@@ -4,13 +4,17 @@ public class SignUpUserDTO {
 
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
 
     public SignUpUserDTO() {
     }
 
-    public SignUpUserDTO(String username, String password) {
+    public SignUpUserDTO(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -29,11 +33,29 @@ public class SignUpUserDTO {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
-        return "IncomingUserDTO{" +
+        return "SignUpUserDTO{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }

@@ -17,10 +17,30 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
     const [user, setUser] = useState<UserInterface>(userState)
 
     const changeRole = async () => {
-        const response = "Updated Role" //await axios()
-        alert("Role updated for " + user.username)
-        setUser((user) => ({...user, role:"MANAGER"}))
-        setCheck(!checkbox)
+        const response = await axios.put("http://localhost:8080/users/" + user.userId, 
+        "MANAGER", 
+        {withCredentials: true, headers: {"Content-Type": "application/text",},})
+
+            .then((response)=>{
+                console.log(response.data)
+                alert("Role updated for " + user.username)
+                setUser((user) => ({...user, role:"MANAGER"}))
+                setCheck(!checkbox)
+            })
+            .catch((error)=>{alert(error)})
+    }
+
+    const deleteUser = async () => {
+         const response = await axios.delete("http://localhost:8080/users/" + user.userId,
+        {withCredentials: true})
+
+            .then((response)=>{
+                console.log(response.data)
+                alert("Fired " + user.username + ", records deleted.")
+                
+            })
+            .catch((error)=>{alert(error)})
+
     }
 
     //this will render a view for the employee coming in as props
@@ -37,7 +57,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                 <div>
                     <span>Role: {user.role}</span> 
 
-                    {user.role === "USER" && <div><span> | Promote </span>
+                    {user.role === "USER" && <><span> | Promote </span>
                     <input type="checkbox" id="option1" name="options" value="option1"
                         onChange={check} />
 
@@ -46,10 +66,10 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                         <button className="button" onClick={()=>{navigate("/reimbursements")}}>View Reimbursements</button>
                     </div>
                     <div>
-                        <button className="button" onClick={()=>{}}>Fire</button>
+                        <button className="button" onClick={()=>{deleteUser()}}>Fire</button>
                     </div>
 
-                    </div>}
+                    </>}
 
                     
                 </div>

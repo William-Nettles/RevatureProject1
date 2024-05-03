@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.daos.ReimbursementDAO;
 import com.revature.models.DTOs.IncomingUserDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
+import com.revature.models.DTOs.SignUpUserDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.UserService;
@@ -26,8 +27,9 @@ public class UserController {
 
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserDAO userDAO) {
         this.userService = userService;
+        this.userDAO = userDAO;
     }
 
 
@@ -59,7 +61,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody IncomingUserDTO userDTO) {
+    public ResponseEntity<String> createUser(@RequestBody SignUpUserDTO userDTO) {
 
         try{
             userService.createUser(userDTO);
@@ -71,7 +73,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<?> getAllUsers(HttpSession session){
-        if (session.getAttribute((String) session.getAttribute("role")).equals("USER")) {
+        if (((String) session.getAttribute("role")).equals("USER")) {
             return ResponseEntity.status(401).body("You must be logged in as a manager to look up users");
         }
 
@@ -81,7 +83,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/userId")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<String>deleteUser(@PathVariable int userId, HttpSession session){
        String userRole =(String) session.getAttribute("role");
 

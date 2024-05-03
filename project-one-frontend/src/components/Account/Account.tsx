@@ -14,11 +14,11 @@ export const Account:React.FC = ()=>{
 
     const navigate = useNavigate()
     const [user, setUser] = useState<UserInterface>({
-        username:state.userSessionData.username,
-        role:state.userSessionData.role,
-        userId:state.userSessionData.userId,
-        firstName:state.userSessionData.firstName,
-        lastName:state.userSessionData.lastName
+        username:"",
+        role:"",
+        userId:0,
+        firstName:"",
+        lastName:""
     })
 
     const [userTemp, setUserTemp] = useState<UserInterface[]>([])
@@ -29,7 +29,7 @@ export const Account:React.FC = ()=>{
 
         //our GET request (remember to send withCredentials to confirm the user is logged in)
         const response = await axios.get("http://localhost:8080/users", {withCredentials:true}).then((response)=>{
-            setUser(response.data)
+            setUserTemp(response.data)
             console.log(response.data)
         }).catch((error)=>{console.log(error);
         })
@@ -49,11 +49,11 @@ export const Account:React.FC = ()=>{
         </div>
 
         <div>
-            <h3>Username: {user.username}</h3>
-            <h3>Name: {user.firstName} {user.lastName}</h3>
-            <h3>Role: {user.role}</h3>
+            <h3>Username: {state.userSessionData.username}</h3>
+            <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
+            <h3>Role: {state.userSessionData.role}</h3>
         </div>
-        {user.role==="MANAGER" && <div>
+        {state.userSessionData.role==="MANAGER" && <div>
             <h2>All Users:</h2>
             {userTemp.map((user, index) =>  <div>
                 <User {...user}/>
