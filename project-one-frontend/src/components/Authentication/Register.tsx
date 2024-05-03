@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { useState } from "react"
 import axios from "axios"
-
+import "./Register.css"
 //for account creation
 //users can create an account or navigate back to login
 
@@ -47,7 +47,8 @@ export const Register:React.FC = () => {
     }
 
     return(
-        <div>
+        <div className="register">
+            
             <div>
                 <p>First Name:</p>
                 <input type="text" placeholder="First Name" name="firstname" onChange={storeValues}/>
