@@ -2,7 +2,6 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
-import { ReimbursementContainer } from "../Reimbursement/ReimbursementContainer"
 import { Reimbursement } from "../Reimbursement/Reimbursement"
 import { NavPanel } from "./NavPanel"
 
@@ -26,6 +25,8 @@ export const Pending:React.FC = ()=>{
     useEffect(()=>{getReimbursements()},[])
 
     const getReimbursements = async () => {
+
+
 
         //our GET request (remember to send withCredentials to confirm the user is logged in)
         const response = await axios.get("http://localhost:8080/reimbursements/pending", {withCredentials:true}).then((response)=>{

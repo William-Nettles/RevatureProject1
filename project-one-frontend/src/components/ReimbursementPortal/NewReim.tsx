@@ -5,6 +5,7 @@ import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
 import { error } from "console"
 import { spawn } from "child_process"
 import { NavPanel } from "./NavPanel"
+import { state } from "../../globalData/store"
 
 //component for creating a new reimbursement
 
@@ -34,6 +35,9 @@ export const NewReim:React.FC = () => {
      const submit = async ()=> {
        
         if (reim.description && reim.description?.length > 0 && reim.amount > 0) {
+
+            if (state.userSessionData.userId > 0) {
+
             //console.log('hello')
             const response = await axios.post("http://localhost:8080/reimbursements",
             reim,
@@ -42,6 +46,10 @@ export const NewReim:React.FC = () => {
                 setMessage("Reimbursement Successfully Created")
                 //navigate("/reimbursements/new")
             }).catch((error)=>{alert(error)})
+        } else {
+            console.log("user not logged in")
+            alert("You must be logged in to submit a reimbursement.")            
+        }
 
         } else {
             console.log("bad input")

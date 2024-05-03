@@ -36,33 +36,44 @@ export const Account:React.FC = ()=>{
 
         //populate the user state  
         
-
-        
     }
 
     
     return(
-       <div>
-        <h2>Account Information</h2>
-        <div>
-            <button className="button" onClick={()=> {navigate("/home")}}>Back</button>
-        </div>
 
-        <div>
-            <h3>Username: {state.userSessionData.username}</h3>
-            <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
-            <h3>Role: {state.userSessionData.role}</h3>
-        </div>
-        {state.userSessionData.role==="MANAGER" && <div>
-            <h2>All Users:</h2>
-            {userTemp.map((user, index) =>  <div>
-                <User {...user}/>
+        
+
+       <div>
+
+        {state.userSessionData.userId > 0 ?
+        <div> 
+
+            <h2>Account Information</h2>
+            <div>
+                <button className="button" onClick={()=>{navigate("/reimbursements")}}>Reimbursement Portal</button>
+                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
+                <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
             </div>
-        )}
-           
-            
-            
-            
+
+            <div>
+                <h3>Username: {state.userSessionData.username}</h3>
+                <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
+                <h3>Role: {state.userSessionData.role}</h3>
+            </div>
+            {state.userSessionData.role==="MANAGER" && <div>
+                <h2>All Users:</h2>
+                {userTemp.map((user, index) =>  <div>
+                    <User {...user}/>
+                </div>
+            )}
+                
+            </div>}
+        </div> : <div> 
+
+            <h2>Please log in to view account information</h2>
+            <button className="button" onClick={()=> {navigate("/home")}}>Back</button>
+            <button className="button" onClick={()=> {navigate("/")}}>Log In</button>
+
         </div>}
 
         </div>

@@ -23,7 +23,7 @@ export const Login:React.FC = () => {
         ).then((response)=> {
             console.log(response.data)
             state.userSessionData = response.data
-            alert(state.userSessionData.username + " logged in successfully")
+            alert("Welcome, " + state.userSessionData.username)
             navigate("/home")
         }).catch((response)=>{
             console.log(response.data)

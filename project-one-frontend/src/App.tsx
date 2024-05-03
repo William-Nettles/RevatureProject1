@@ -9,6 +9,7 @@ import { Reimbursements } from './components/ReimbursementPortal/ReimPortal';
 import { AllReims } from './components/ReimbursementPortal/AllReims';
 import { Pending } from './components/ReimbursementPortal/Pending';
 import { Account } from './components/Account/Account';
+import { Logout } from './components/Authentication/Logout';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/reimbursements/all' element={<AllReims/>}/>
           <Route path='/reimbursements/pending' element={<Pending/>}/>
           <Route path='/account' element={<Account/>}/>
+          <Route path='/logout' element={<Logout/>}/>
         </Routes>
       </BrowserRouter>
     </div>

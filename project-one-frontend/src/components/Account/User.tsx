@@ -9,10 +9,16 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
 
     const navigate = useNavigate()
 
-    const [checkbox, setCheck] = useState(false)
-    const check = () => {
-        setCheck(!checkbox)
+    const [checkbox1, setCheck1] = useState(false)
+    const check1 = () => {
+        setCheck1(!checkbox1)
     }
+    const [checkbox2, setCheck2] = useState(false)
+    const check2 = () => {
+        setCheck2(!checkbox2)
+    }
+
+    const [employed, setEmployed] = useState(true)
 
     const [user, setUser] = useState<UserInterface>(userState)
 
@@ -25,7 +31,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                 console.log(response.data)
                 alert("Role updated for " + user.username)
                 setUser((user) => ({...user, role:"MANAGER"}))
-                setCheck(!checkbox)
+                setCheck1(!checkbox1)
             })
             .catch((error)=>{alert(error)})
     }
@@ -37,7 +43,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
             .then((response)=>{
                 console.log(response.data)
                 alert("Fired " + user.username + ", records deleted.")
-                
+                setEmployed(false)
             })
             .catch((error)=>{alert(error)})
 
@@ -46,37 +52,41 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
     //this will render a view for the employee coming in as props
     return (
         <div className="user-container">
-            <div className="user-id">
-                <h3>{user.username}</h3>
-            </div>
 
-            <div className="employee-data">
-                <p>User Id: {user.userId}</p>
-                <p>Username: {user.username}</p>
-                <p>Name: {user.firstName} {user.lastName}</p>
-                <div>
-                    <span>Role: {user.role}</span> 
+            { employed===true && <div>
 
-                    {user.role === "USER" && <><span> | Promote </span>
-                    <input type="checkbox" id="option1" name="options" value="option1"
-                        onChange={check} />
-
-                    {checkbox && <button className="button" onClick={changeRole}>Confirm</button>}
-                    <div>
-                        <button className="button" onClick={()=>{navigate("/reimbursements")}}>View Reimbursements</button>
-                    </div>
-                    <div>
-                        <button className="button" onClick={()=>{deleteUser()}}>Fire</button>
-                    </div>
-
-                    </>}
-
-                    
+                <div className="user-id">
+                    <h3>{user.username}</h3>
                 </div>
-                
-                
 
-            </div>
+                <div className="employee-data">
+                    <p>User Id: {user.userId}</p>
+                    <p>Username: {user.username}</p>
+                    <p>Name: {user.firstName} {user.lastName}</p>
+                    <div>
+                        <span>Role: {user.role}</span> 
+
+                        {user.role === "USER" && <><span> | Promote </span>
+                        <input type="checkbox" id="option1" name="options" value="option1"
+                            onChange={check1} />
+
+                        {checkbox1 && <button className="button" onClick={changeRole}>Confirm</button>}
+                        <>
+                        <span> | Fire </span>
+                        <input type="checkbox" id="option2" name="options" value="option2"
+                            onChange={check2} />
+                        {checkbox2 && <button className="button" onClick={deleteUser}>Confirm</button>}
+                        </>
+
+                        </>}
+
+                        
+                    </div>
+                    
+                    
+
+                </div>
+            </div>}
         </div>
     )
 }

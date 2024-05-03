@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { state } from "../../globalData/store"
 
 //Home page
 //Users can navigate to their account, sign out, or navigate to reimbursements portal
@@ -14,7 +15,11 @@ export const Home:React.FC = () => {
             <div>
                 <button className="button" onClick={()=>{navigate("/reimbursements")}}>Reimbursement Portal</button>
                 <button className="button" onClick={()=>{navigate("/account")}}>Account</button>
-                <button className="button" onClick={()=> {navigate("/")}}>Sign Out</button>
+
+                {state.userSessionData.userId > 0 ? 
+
+                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button> 
+                : <button className="button" onClick={()=>{navigate("/login")}}>Log In</button>} 
             </div>
         </div>
     )
