@@ -34,7 +34,7 @@ export const Register:React.FC = () => {
 
      const register = async ()=> {
         
-        const response = await axios.post("http://localhost:8080/users", user).then(()=>{
+        await axios.post("http://localhost:8080/users", user).then(()=>{
             //after registration, send user back to login page
         navigate("/")
         }).catch(()=>{

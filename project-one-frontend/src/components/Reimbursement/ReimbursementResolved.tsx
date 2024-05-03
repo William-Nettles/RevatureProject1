@@ -1,41 +1,12 @@
-//This component displays a reimbursement, child component of the reimbursement container
-
-import axios from "axios"
-import { useState } from "react"
-import { state } from "../../globalData/store"
-import { useNavigate } from "react-router-dom"
-
+//This component displays a reimbursement which has been resolved
+// technically any reuimbursement in the "/all" route is displayed with this component, even pending reimbursements
+// its easier to have a spearate component for this route tho, since functionality is diffrent
 export const ReimbursementResolved: React.FC<any> = (reimbursement:any) => {
-
-
-    const [reimStatus, setStatus] = useState(reimbursement.status)
 
     let status: Map<number,string> = new Map()
     status.set(0,"Pending ")
     status.set(1,"Approved ")
     status.set(2,"Denied ")
-
-    const approve = async () => {
-
-        const response = await axios.put("http://localhost:8080/reimbursements/status/" + reimbursement.reimbId, 1,
-            {withCredentials: true, headers: {"Content-Type": "application/json",},})
-            .then((response)=>{
-                console.log(response.data)
-                setStatus(1)
-            }).catch((error)=>{alert(error)})
-
-    }
-    const deny = async () => {
-
-       
-        const response = await axios.put("http://localhost:8080/reimbursements/status/" + reimbursement.reimbId, 2,
-            {withCredentials: true, headers: {"Content-Type": "application/json",},})
-            .then((response)=>{
-                setStatus(2)
-                console.log(response.data)
-            }).catch((error)=>{alert(error)})
-
-    }
 
     //this will render a view for the character coming in as props
     return (
@@ -48,7 +19,7 @@ export const ReimbursementResolved: React.FC<any> = (reimbursement:any) => {
                 <div className="employee-data">
                      <p>User: {reimbursement.user.username}</p>
                     <p>
-                        Status: {status.get(reimStatus)} 
+                        Status: {status.get(reimbursement.status)} 
                         
                     </p>
                     <p>Amount: {reimbursement.amount}</p>

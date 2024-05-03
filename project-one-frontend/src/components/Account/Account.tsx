@@ -4,7 +4,7 @@ import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
 import { state } from "../../globalData/store"
 import axios from "axios"
-import { error } from "console"
+
 
 
 //component to display a user's account
@@ -13,13 +13,7 @@ import { error } from "console"
 export const Account:React.FC = ()=>{
 
     const navigate = useNavigate()
-    const [user, setUser] = useState<UserInterface>({
-        username:"",
-        role:"",
-        userId:0,
-        firstName:"",
-        lastName:""
-    })
+    
 
     const [userTemp, setUserTemp] = useState<UserInterface[]>([])
 
@@ -28,7 +22,7 @@ export const Account:React.FC = ()=>{
     const getAllUsers = async () => {
 
         //our GET request (remember to send withCredentials to confirm the user is logged in)
-        const response = await axios.get("http://localhost:8080/users", {withCredentials:true}).then((response)=>{
+        await axios.get("http://localhost:8080/users", {withCredentials:true}).then((response)=>{
             setUserTemp(response.data)
             console.log(response.data)
         }).catch((error)=>{console.log(error);
@@ -40,9 +34,6 @@ export const Account:React.FC = ()=>{
 
     
     return(
-
-        
-
        <div>
 
         {state.userSessionData.userId > 0 ?

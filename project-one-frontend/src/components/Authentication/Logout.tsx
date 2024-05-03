@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 export const Logout:React.FC= () => {
 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const signout = async () => {
 
         state.userSessionData.username = ""
@@ -14,7 +15,7 @@ export const Logout:React.FC= () => {
         state.userSessionData.lastName = ""
         state.userSessionData.userId = 0
 
-        const response = await axios.get("http://localhost:8080/users/logout", {withCredentials:true})
+        await axios.get("http://localhost:8080/users/logout", {withCredentials:true})
         .then((response)=>{
             console.log(response)
             navigate("/")})
@@ -23,10 +24,10 @@ export const Logout:React.FC= () => {
 
     const navigate = useNavigate()
 
-        useEffect(()=>{
+    useEffect(()=>{
         signout()
         navigate("/")
-    },[])
+    },[navigate, signout])
 
     return(
         <div>

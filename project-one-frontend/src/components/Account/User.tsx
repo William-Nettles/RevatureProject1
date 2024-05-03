@@ -1,13 +1,11 @@
 import { useState } from "react"
 import { UserInterface } from "../../interfaces/UserInterface"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 
 //For displaying users to a Manager, will allow them to promote employees, fire employees, and view an naviagte to reimbursements
 
 export const User: React.FC<UserInterface> = (userState:UserInterface) => {
-
-    const navigate = useNavigate()
 
     const [checkbox1, setCheck1] = useState(false)
     const check1 = () => {
@@ -23,7 +21,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
     const [user, setUser] = useState<UserInterface>(userState)
 
     const changeRole = async () => {
-        const response = await axios.put("http://localhost:8080/users/" + user.userId, 
+        await axios.put("http://localhost:8080/users/" + user.userId, 
         "MANAGER", 
         {withCredentials: true, headers: {"Content-Type": "application/text",},})
 
@@ -37,7 +35,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
     }
 
     const deleteUser = async () => {
-         const response = await axios.delete("http://localhost:8080/users/" + user.userId,
+        await axios.delete("http://localhost:8080/users/" + user.userId,
         {withCredentials: true})
 
             .then((response)=>{
@@ -66,25 +64,19 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                     <div>
                         <span>Role: {user.role}</span> 
 
-                        {user.role === "USER" && <><span> | Promote </span>
-                        <input type="checkbox" id="option1" name="options" value="option1"
+                        {user.role === "USER" && <>
+                            <span> | Promote </span>
+                            <input type="checkbox" id="option1" name="options" value="option1"
                             onChange={check1} />
 
-                        {checkbox1 && <button className="button" onClick={changeRole}>Confirm</button>}
-                        <>
-                        <span> | Fire </span>
-                        <input type="checkbox" id="option2" name="options" value="option2"
-                            onChange={check2} />
-                        {checkbox2 && <button className="button" onClick={deleteUser}>Confirm</button>}
-                        </>
-
-                        </>}
-
+                            {checkbox1 && <button className="button" onClick={changeRole}>Confirm</button>}
                         
+                            <span> | Fire </span>
+                            <input type="checkbox" id="option2" name="options" value="option2"
+                                onChange={check2} />
+                            {checkbox2 && <button className="button" onClick={deleteUser}>Confirm</button>}
+                        </>}
                     </div>
-                    
-                    
-
                 </div>
             </div>}
         </div>

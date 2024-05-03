@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
-import { error } from "console"
-import { spawn } from "child_process"
 import { NavPanel } from "./NavPanel"
 import { state } from "../../globalData/store"
 
@@ -11,25 +8,20 @@ import { state } from "../../globalData/store"
 
 export const NewReim:React.FC = () => {
 
-    const navigate = useNavigate()
+    const[responseMessage, setMessage] = useState("")
 
     const[reim,setReim] = useState<ReimbursementInterface>({
         amount:0,
         description:"",
     })
 
-    const[responseMessage, setMessage] = useState("")
-
     const storeValues = (input:any) => {
 
         if (input.target.name === "amount") {
             setReim((reim) => ({...reim, amount:input.target.value}))
-            
-            
         } else {
             setReim((reim) => ({...reim, description:input.target.value}))
         }
-        
     }
 
      const submit = async ()=> {
@@ -39,7 +31,7 @@ export const NewReim:React.FC = () => {
             if (state.userSessionData.userId > 0) {
 
             //console.log('hello')
-            const response = await axios.post("http://localhost:8080/reimbursements",
+            await axios.post("http://localhost:8080/reimbursements",
             reim,
             {withCredentials:true}).then((response)=>{
                 console.log(response.data)
