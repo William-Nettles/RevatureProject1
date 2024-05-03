@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Entity
 @Table(name="users")
@@ -27,6 +29,9 @@ public class User {
 
     @Column(nullable = false)
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Reimbursement> pokemon;
 
     public User() {}
 
