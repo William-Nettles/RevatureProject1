@@ -4,6 +4,7 @@ import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
 import { state } from "../../globalData/store"
 import axios from "axios"
+import "./Account.css"
 
 
 
@@ -37,35 +38,59 @@ export const Account:React.FC = ()=>{
        <div>
 
         {state.userSessionData.userId > 0 ?
-        <div> 
+        <div className="account-container"> 
 
-            <h2>Account Information</h2>
-            <div>
+            <div className="header-container">
+                <h2>Account Information</h2>
+            </div>
+            
+            <div button-container>
                 <button className="button" onClick={()=>{navigate("/reimbursements")}}>Reimbursement Portal</button>
                 <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
                 <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
             </div>
 
-            <div>
-                <h3>Username: {state.userSessionData.username}</h3>
-                <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
-                <h3>Role: {state.userSessionData.role}</h3>
+            <div className="account-container">
+                <div className="account-info">
+                    <h3>Username: {state.userSessionData.username}</h3>
+                </div>
+                <div className="account-info">
+                    <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
+                </div>
+                <div className="account-info">
+                    <h3>Role: {state.userSessionData.role}</h3>
+                </div>
+                
             </div>
-            {state.userSessionData.role==="MANAGER" && <div>
+            
+        </div> : <div className="account-container"> 
+
+            <h2>Please log in to view account information</h2>
+            <div className="button-container">
+                <button className="button" onClick={()=> {navigate("/home")}}>Back</button>
+                <button className="button" onClick={()=> {navigate("/")}}>Log In</button>
+            </div>
+            
+
+        </div>}
+
+        <div>
+
+            <div className="user-container">
+
+            
+            {state.userSessionData.role==="MANAGER" && <div className="manager-view">
                 <h2>All Users:</h2>
-                {userTemp.map((user, index) =>  <div>
+                {userTemp.map((user, index) =>  
+                <div className="user-container">
                     <User {...user}/>
                 </div>
             )}
                 
             </div>}
-        </div> : <div> 
 
-            <h2>Please log in to view account information</h2>
-            <button className="button" onClick={()=> {navigate("/home")}}>Back</button>
-            <button className="button" onClick={()=> {navigate("/")}}>Log In</button>
-
-        </div>}
+            </div>
+            </div>
 
         </div>
     )

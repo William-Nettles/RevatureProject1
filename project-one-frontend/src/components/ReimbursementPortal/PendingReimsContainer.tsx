@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
-import { Reimbursement } from "../Reimbursement/ReimbursementPending"
+import { Reimbursement } from "../Reimbursement/Reimbursement"
 import { NavPanel } from "./NavPanel"
 
 //view all pending reimbursements

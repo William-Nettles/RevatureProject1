@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { state } from "../../globalData/store"
 import { useEffect } from "react"
+import "./NavPanel.css"
 
 //a child component of all of the reimbursement portal child componets, just has nav buttons
 export const NavPanel:React.FC = ()=> {
@@ -15,13 +16,12 @@ export const NavPanel:React.FC = ()=> {
     })
 
 return (
-        <div>
-            <div>
+        <div className="nav-panel">
+            <div className="button-container">
                 <button className="button" onClick={()=>{navigate("/account")}}>Account</button>
                 <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
                 <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
-            </div>
-            <div>
+           
                 <button className="button" onClick={
                     ()=>{navigate("/reimbursements/new")}}>Create Reimbursement</button>
                 <button className="button" onClick={()=>{navigate("/reimbursements/pending")}}>Check Pending</button>
