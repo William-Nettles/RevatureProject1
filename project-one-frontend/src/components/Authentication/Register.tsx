@@ -20,11 +20,11 @@ export const Register:React.FC = () => {
 
     const storeValues = (input:any) => {
 
-        if(input.target.name === "username") {
+        if(input.target.name === "firstname") {
             setUser((user) => ({...user, username:input.target.value}))
-        } else if (input.target.name === "password") {
+        } else if (input.target.name === "lastname") {
             setUser((user) => ({...user, password:input.target.value}))
-        } else if (input.target.name === "firstname") {
+        } else if (input.target.name === "username") {
             setUser((user) => ({...user, firstName:input.target.value}))
         } else {
             setUser((user) => ({...user, lastName:input.target.value}))
