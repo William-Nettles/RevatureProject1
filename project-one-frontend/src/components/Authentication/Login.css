@@ -1,54 +1,119 @@
-.login {
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    /* Add background image */
+    background-image: url("../../../public/office2.jpg");
+    /* Set background image properties */
+    background-size: cover;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
 }
 
+.login {
+    background-color: rgba(255, 255, 255, 0.8); /* Add some opacity to the background */
+    padding: 30px;
+    border-radius: 5px;
+    /* Apply border-radius to the entire login form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    /* Adjust width as needed */
+}
+
+/* Header */
 .text-container {
     text-align: center;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.text-container h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.text-container h3 {
-    font-size: 18px;
     margin-bottom: 20px;
 }
 
+h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-family: 'Roboto', serif;
+    /* Use a serif font for h1 */
+}
+
+h3 {
+    font-size: 18px;
+    color: #999;
+    font-family: 'Open Sans', sans-serif;
+    /* Use a sans-serif font for h3 */
+}
+
+/* Input fields */
 .input-container {
     margin-bottom: 15px;
-    margin-right: 15px;
 }
 
-.input-container input {
+input[type="text"],
+input[type="password"] {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
     border: 1px solid #ccc;
-    outline: none;
-}
-
-.login-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    background-color: #0253a9;
-    color: #fff;
+    border-radius: 7px;
+    /* Round input box corners */
     font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-sizing: border-box;
 }
 
+/* Sign in button */
+.login-button {
+    width: calc(50% - 5px);
+    /* Adjust width for side-by-side buttons with space between them */
+    padding: 15px;
+    background-color: #000;
+    /* Black background color */
+    border: none;
+    border-radius: 9px;
+    /* Round button corners */
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    /* White text color */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+/* Adjust margin between buttons */
+.login-button:first-child {
+    margin-right: 5px;
+}
+
+.login-button:last-child {
+    margin-left: 5px;
+}
 .login-button:hover {
-    background-color: #1468c2;
+    background-color: #666;
+    /* Dark grey hover color */
+}
+
+/* Create account button */
+.create-account-button a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    /* Add space between the two buttons */
+    padding: 15px;
+    background-color: #000;
+    /* Black background color */
+    border: none;
+    border-radius: 7px;
+    /* Round button corners */
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.create-account-button a:hover {
+    background-color: #666;
+    /* Dark grey hover color */
 }
