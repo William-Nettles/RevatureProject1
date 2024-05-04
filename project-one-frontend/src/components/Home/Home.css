@@ -7,7 +7,7 @@
 
 .welcome-container {
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -30,18 +30,35 @@
     margin-top: 20px;
 }
 
-.button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0253a9;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.button:first-child {
+    margin-right: 5px;
 }
 
-.button:hover {
-    background-color: #1468c2;
+.button:last-child {
+    margin-left: 5px;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    /* Add space between the two buttons */
+    padding: 15px;
+    background-color: #000;
+    /* Black background color */
+    border: none;
+    border-radius: 7px;
+    /* Round button corners */
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.button :hover {
+    background-color: #666;
+    /* Dark grey hover color */
 }

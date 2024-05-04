@@ -1,19 +1,44 @@
 .home {
     display: grid;
-    place-items: left;
+    place-items: center;
+    align-items: center;
     height: 100vh;
+    grid-auto-flow: dense;
+}
+
+.accout-root {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
+.account {
+    background-color: #999;
+justify-content: center;
+justify-items: center;
+place-content: center;
+align-content: center;
+
 }
 
 .account-container {
     display: grid;
-    grid-row: 3;
-    grid-column: 1;
-    text-align: left;
-    background-color: #f0f0f0;
+    
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    
+}
+
+.account-container-2 {
+    display: grid;
+    grid-column: 1;
 
 }
 
@@ -42,25 +67,28 @@ h3 {
 }
 
 .header-container {
+    display: grid;
     
-    display: flex;
+    
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 .button-container {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 /* Create account button */
-.button {
+.button-container button {
     display: block;
     text-align: center;
     margin-top: 10px;
@@ -80,28 +108,114 @@ h3 {
     /* Smooth transition for hover effect */
 }
 
-.button :hover {
+.button:hover {
     background-color: #666;
     /* Dark grey hover color */
 }
 
 .users-container {
     display: grid;
-    grid-row: 1;
-    grid-column: 1;
+   
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
-.manager-view {
-    display: grid;
-    grid-row: 1;
-    grid-column: 3;
-    text-align: center;
-    background-color: #f0f0f0;
+.user-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+}
+
+.users {
+    display: flex;
+    flex-wrap: wrap;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        /* Adjust the minimum and maximum width of each grid item as needed */
+        grid-gap: 20px;
+        /* Adjust the gap between grid items */
+        grid-auto-flow: column;
+}
+
+.all-users {
+    display: grid;
+    grid-row: 1;
+    grid-column: 1;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.manager-view {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    
+    margin-top: 20px;
+}
+
+
+.user-id h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #999;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.employee-data p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.employee-data div {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
+
+.employee-data div span {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.employee-data div button {
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.employee-data div button:hover {
+    background-color: #666;
+}
+
+.role  {
+    
+    justify-content: left;
+    align-items: left;
+    justify-items: left;
+}
+
+.promote {
+    display: flex;
+    flex-direction: row;
+}
+
+.fire {
+    display: grid;
+    grid-row: 1;
 }

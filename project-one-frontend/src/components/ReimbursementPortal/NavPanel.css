@@ -6,8 +6,8 @@
 }
 
 .button-container { 
-    
-    
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
     background-color: #f0f0f0;
     padding: 20px;
@@ -15,27 +15,19 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.account-container button,
-.reim-container button {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin: 5px;
-    background-color: #0253a9;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.button {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.account-container button:hover,
-.reim-container button:hover {
-    background-color: #1468c2;
+.button:first-child {
+    margin-right: 5px;
 }
+
+.button:last-child {
+    margin-left: 5px;
+}
+
 
 .reimbursement-portal {
     display: flex;
