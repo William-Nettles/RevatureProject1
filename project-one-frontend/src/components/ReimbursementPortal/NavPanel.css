@@ -74,3 +74,82 @@
     margin-right: 10px;
     margin-left: 10;
 }
+
+.pending-reims h2 {
+    background-color: rgba(255, 255, 255, 0.8);
+        /* Add some opacity to the background */
+        /* Background color for the panel */
+        padding: 20px;
+        border-radius: 10px;
+        /* Rounded corners for the panel */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow */
+        display: flex;
+        /* Use flexbox for layout */
+        flex-direction: column;
+    
+        /* Stack elements vertically */
+        width: fit-content;
+        /* Adjust width as needed */
+        margin: 10px auto;
+        /* Center the panel horizontally */
+}
+
+.pending {
+    display: flex;
+        flex-wrap: wrap;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        /* Adjust the minimum and maximum width of each grid item as needed */
+        grid-gap: 20px;
+        /* Adjust the gap between grid items */
+        grid-auto-flow: column;
+        justify-content: center;
+}
+
+.reimResolved {
+    display: flex;
+        flex-wrap: wrap;
+        
+        
+        justify-content: center;
+}
+
+.reimbursement {
+        background-color: rgba(255, 255, 255, 0.8);
+            /* Add some opacity to the background */
+            /* Background color for the panel */
+            padding: 20px;
+            border-radius: 10px;
+            /* Rounded corners for the panel */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            display: flex;
+            /* Use flexbox for layout */
+            flex-direction: column;
+        
+            /* Stack elements vertically */
+            width: fit-content;
+            /* Adjust width as needed */
+            
+            /* Center the panel horizontally */
+            min-width: 125px;
+            max-width: 125px;
+            margin: 5px;
+}
+
+.reim-button-container {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+.pend-button {
+    width: fit-content;
+    margin: 2px;
+}
+
+.submit {
+    align-items: left;
+    display: flex;
+}
+

@@ -70,10 +70,10 @@ export const NewReim:React.FC = () => {
                 </div>
                 
 
-                <div>
+                <div className="submit">
                     <button className="button" onClick={submit}>Submit</button>
-                    {responseMessage && <span> {responseMessage}</span>}
                 </div>
+                {responseMessage && <span> {responseMessage}</span>}
             </div>
         </div>
     )

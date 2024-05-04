@@ -39,14 +39,16 @@ export const Pending:React.FC = ()=>{
         <NavPanel/>
         <div>
             
-            <div>
+            <div className="pending-reims">
                 <h2>Pending Reimbursements:</h2>
 
                 {/*using the .map() function to rener a Character Component for every element in the characters array*/}
-                <div>
+                <div className="pending">
                     {reimbursements.map((reimbursement:any) => {
-                        return <Reimbursement {...reimbursement}  key={reimbursement.reimId}/>
-                    })}
+                        return <div className="reimbursement">
+                            <Reimbursement {...reimbursement}  key={reimbursement.reimId}/>
+  
+                            </div>})}
                 </div>
             </div>
         </div>

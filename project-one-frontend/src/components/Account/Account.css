@@ -7,6 +7,7 @@
 }
 
 .accout-root {
+    width: 100%;
     display: grid;
     grid-auto-flow: column;
     align-items: center;
@@ -89,7 +90,7 @@ h3 {
 
 /* Create account button */
 .button-container button {
-    display: block;
+    display: grid;
     text-align: center;
     margin-top: 10px;
     /* Add space between the two buttons */
@@ -106,6 +107,8 @@ h3 {
     text-decoration: none;
     transition: background-color 0.3s ease;
     /* Smooth transition for hover effect */
+    width: max-content;
+    margin: 5px;
 }
 
 .button:hover {
@@ -131,6 +134,8 @@ h3 {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    min-width: 15%;
+    max-width: fit-content;
 }
 
 .users {
@@ -141,6 +146,7 @@ h3 {
         grid-gap: 20px;
         /* Adjust the gap between grid items */
         grid-auto-flow: column;
+        justify-content: center;
 }
 
 .all-users {
@@ -213,9 +219,11 @@ h3 {
 .promote {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .fire {
     display: grid;
     grid-row: 1;
+    align-items: center;
 }

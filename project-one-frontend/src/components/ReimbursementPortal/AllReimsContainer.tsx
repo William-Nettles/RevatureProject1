@@ -40,13 +40,13 @@ export const AllReims:React.FC = ()=>{
                 <NavPanel/>
             </div> 
             <div>
-                <div>
+                <div className="pending-reims">
                     <h2>Reimbursements:</h2>
                 </div>
                 {/*using the .map() function to rener a Character Component for every element in the characters array*/}
                 <div className="reimResolved">
                     {reimbursements.map((reimbursement:any, index) =>   {
-                        return <div className="resolved"><ReimbursementResolved {...reimbursement}  key={reimbursement.reimId}/>
+                        return <div className="reimbursement"><ReimbursementResolved {...reimbursement}  key={reimbursement.reimId}/>
                     </div>}
                     )}
                 </div>

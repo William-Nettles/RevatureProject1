@@ -60,10 +60,10 @@ export const Reimbursement: React.FC<any> = (reimbursement:any) => {
                     <p>User: {reimbursement.user.username}</p>
                     <p>
                         Status: {status.get(thisReim.status)} 
-                        {state.userSessionData.role === "MANAGER" && <>
-                        <button className="button" onClick={() => { approve() } }>Approve</button>
-                        <button className="button" onClick={() => { deny() } }>Deny</button>
-                        </>}
+                        {state.userSessionData.role === "MANAGER" && <div className="reim-button-container">
+                        <button className="pend-button" onClick={() => { approve() } }>Approve</button>
+                        <button className="pend-button" onClick={() => { deny() } }>Deny</button>
+                        </div>}
                     </p>
                     <p>Amount: {thisReim.amount}</p>
                     <p>Description: {thisReim.description}</p> 
