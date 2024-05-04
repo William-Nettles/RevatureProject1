@@ -35,7 +35,7 @@ export const Pending:React.FC = ()=>{
 
     return(
        <div>
-        <h2>Reimbursement Portal</h2>
+        {/* <h2>Reimbursement Portal</h2> */}
         <NavPanel/>
         <div>
             

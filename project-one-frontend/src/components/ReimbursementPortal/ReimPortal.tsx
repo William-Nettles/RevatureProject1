@@ -5,10 +5,10 @@ import { NavPanel } from "./NavPanel"
 export const Reimbursements:React.FC = () => {
 
     return(
-        <div className="reimbursement-portal">
+        <div>
 
             <div className="header-container">
-                <h2 className="header">Reimbursement Portal</h2>
+                {/* <h2 className="header">Reimbursement Portal</h2> */}
             </div>
 
             <div className="nav-container">

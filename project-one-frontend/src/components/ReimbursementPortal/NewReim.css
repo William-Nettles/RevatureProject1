@@ -1,0 +1,93 @@
+/* Reimbursement form card styles */
+
+.NewReim {
+    background-color: rgba(255, 255, 255, 0.8);/* Add some opacity to the background */
+    /* White background for the card */
+    border-radius: 5px;
+    /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    padding: 30px;
+    /* Padding for content */
+    width: 400px;
+    /* Adjust width as needed */
+    margin: 0 auto;
+    /* Center the card horizontally */
+}
+
+.NewReim h2,
+.NewReim h3 {
+    text-align: center;
+    /* Center headings within the card */
+    margin-bottom: 15px;
+    /* Adjust margin for headings */
+}
+
+h2 {
+    font-size: 24px;
+    font-family: 'Roboto', serif;
+}
+
+h3 {
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Input fields */
+.input-container {
+    margin-bottom: 15px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    /* Maintain rounded corners for inputs */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Submit button */
+.button {
+    width: calc(50% - 5px);
+    padding: 15px;
+    background-color: #000;
+    /* Black background color */
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    /* White text color */
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+    /* Center the buttons horizontally within the card */
+    display: block;
+    /* Display buttons on separate lines */
+    margin-bottom: 10px;
+    /* Add space between buttons */
+}
+
+.button:hover {
+    background-color: #666;
+    /* Dark grey hover color */
+}
+
+/* Response message styling */
+.responseMessage {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+    /* Center response message within the card */
+}
+
+/* Assume `NavPanel` has its own styles */

@@ -7,7 +7,7 @@ import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
 import { useEffect, useState } from "react"
 import { NavPanel } from "./NavPanel"
 import { ReimbursementResolved } from "../Reimbursement/ReimbursementResolved"
-
+import "./AllReims.css"
 export const AllReims:React.FC = ()=>{
 
     //const[reimbursements, setReimbursements] = useState<ReimbursementInterface[]>([])
@@ -36,20 +36,21 @@ export const AllReims:React.FC = ()=>{
 
     return(
        <div>
-        <h2>Reimbursement Portal</h2>
+        {/* <h2>Reimbursement Portal</h2> */}
         <NavPanel/>
-        <div>
             <div>
-                 <h2>Reimbursements:</h2>
-
-            {/*using the .map() function to rener a Character Component for every element in the characters array*/}
-            <div>
-                {reimbursements.map((reimbursement:any, index) => {
-                    return <ReimbursementResolved {...reimbursement}  key={reimbursement.reimId}/>
-                })}
+                <div>
+                    <h2>Reimbursements:</h2>
+                </div>
+                {/*using the .map() function to rener a Character Component for every element in the characters array*/}
+                <div className="reimResolved">
+                    {reimbursements.map((reimbursement:any, index) =>   {
+                        return <div className="resolved"><ReimbursementResolved {...reimbursement}  key={reimbursement.reimId}/>
+                    </div>}
+                    )}
+                </div>
+               
             </div>
-            </div>
-        </div>
         </div>
     )
 }

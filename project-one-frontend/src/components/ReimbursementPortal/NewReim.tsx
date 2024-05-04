@@ -3,7 +3,7 @@ import axios from "axios"
 import { ReimbursementInterface } from "../../interfaces/ReimbursementInterface"
 import { NavPanel } from "./NavPanel"
 import { state } from "../../globalData/store"
-
+import "./NewReim.css"
 //component for creating a new reimbursement
 
 export const NewReim:React.FC = () => {
@@ -52,24 +52,29 @@ export const NewReim:React.FC = () => {
 
     return(
         <div>
-             <h2>Reimbursement Portal</h2>
-             <NavPanel/>
-             <h3>New Reimbursement</h3>
-            <div>
-                <p>Amount:</p>
-                <input type="number" name="amount" onChange={storeValues}/>
-                {reim.amount<=0 && (<span className="error"> Value must be greater than zero</span>)}
-            </div>
-             <div>
-                <p>Description:</p>
-                <input type="text" placeholder="description" name="description" onChange={storeValues}/>
-                {!reim.description && (<span className="error"> Please provide a description</span>)}
-            </div>
-            
+            <div className="portal">
+                
+                <NavPanel/>
+            </div> 
+            <div className="NewReim">
+                <h3>New Reimbursement</h3>
+                
+                <div>
+                    <p>Amount:</p>
+                    <input type="number" name="amount" onChange={storeValues}/>
+                    {reim.amount<=0 && (<span className="error"> Value must be greater than zero</span>)}
+                </div>
+                <div>
+                    <p>Description:</p>
+                    <input type="text" placeholder="description" name="description" onChange={storeValues}/>
+                    {!reim.description && (<span className="error"> Please provide a description</span>)}
+                </div>
+                
 
-            <div>
-                <button className="button" onClick={submit}>Submit</button>
-                {responseMessage && <span> {responseMessage}</span>}
+                <div>
+                    <button className="button" onClick={submit}>Submit</button>
+                    {responseMessage && <span> {responseMessage}</span>}
+                </div>
             </div>
         </div>
     )

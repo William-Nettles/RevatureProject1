@@ -1,57 +1,65 @@
-.nav-panel {
-   
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
+/* Navigation panel styles */
 
-.button-container { 
-    
-    
-    text-align: center;
-    background-color: #f0f0f0;
+.nav-panel {
+    background-color: rgba(255, 255, 255, 0.8); /* Add some opacity to the background */
+    /* Background color for the panel */
     padding: 20px;
     border-radius: 10px;
+    /* Rounded corners for the panel */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: column;
+    
+    /* Stack elements vertically */
+    width: fit-content;
+    /* Adjust width as needed */
+    margin: 10px auto;
+    /* Center the panel horizontally */
 }
 
-.account-container button,
-.reim-container button {
+.nav-panel h2 {
+    /* Retain heading styles */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Button container styles */
+.button-container {
+    /* Removed card styling from button container */
+    flex-direction: row
+}
+
+/* Button styles */
+
+
+/* Button hover effect */
+
+.button-container-button :hover {
+    background-color: #666;
+    /* flex: */
+}
+
+/* Reimbursement portal styles (unchanged) */
+
+.reimbursement-portal {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     margin-bottom: 10px;
-    margin: 5px;
-    background-color: #0253a9;
+    background-color: #8babce;
     color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.account-container button:hover,
-.reim-container button:hover {
-    background-color: #1468c2;
-}
+/* Header container and header styles (unchanged) */
 
-.reimbursement-portal {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        background-color: #8babce;
-        color: #fff;
-}
-
-.header-container{
+.header-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: right;
@@ -59,6 +67,7 @@
     margin-right: 10px;
     margin-left: 15px;
 }
+
 .header {
     justify-content: right;
     align-items: right;

@@ -8,11 +8,12 @@ body {
     align-items: center;
     min-height: 100vh;
     /* Add background image */
-    background-image: url("../../../public/office1.jpg");
+    background-image: url("../../../public/office2.jpg");
     /* Set background image properties */
     background-size: cover;
     /* background-position: center; */
     background-repeat: no-repeat;
+    
 }
 
 .login {

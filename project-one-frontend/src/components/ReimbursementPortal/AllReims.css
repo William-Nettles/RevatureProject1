@@ -1,0 +1,43 @@
+/* Navigation panel styles (unchanged) */
+
+/* Button container styles (unchanged) */
+
+/* Button styles (unchanged) */
+
+/* Button hover effect (unchanged) */
+
+/* Reimbursement card styles */
+
+.reimbursement-card {
+    background-color: #f0f0f0;
+    /* Card background color */
+    padding: 20px;
+    border-radius: 10px;
+    /* Rounded corners */
+    margin-bottom: 10px;
+    /* Space between cards */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    display: flex;
+    /* Use flexbox for layout (optional, adjust as needed) */
+    flex-direction: column;
+    /* Stack elements vertically */
+    width: fit-content;
+    /* Adjust width as needed */
+}
+
+.reimbursement-card h2 {
+    margin-bottom: 10px;
+    /* Space between heading and content */
+}
+
+/* Grid container styles */
+
+.reimbursement-grid {
+    display: grid;
+    /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Adjust columns dynamically */
+    grid-gap: 20px;
+    /* Space between cards */
+}

@@ -17,15 +17,17 @@ export const NavPanel:React.FC = ()=> {
 
 return (
         <div className="nav-panel">
+            <h2>Reimbursement Portal</h2>
             <div className="button-container">
-                <button className="button" onClick={()=>{navigate("/account")}}>Account</button>
-                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
+
                 <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
-           
+                <button className="button" onClick={()=>{navigate("/account")}}>Account</button>
+                
                 <button className="button" onClick={
                     ()=>{navigate("/reimbursements/new")}}>Create Reimbursement</button>
                 <button className="button" onClick={()=>{navigate("/reimbursements/pending")}}>Check Pending</button>
                 <button className="button" onClick={()=>{navigate("/reimbursements/all")}}>View All</button>
+                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
             </div>
         </div>
     )
