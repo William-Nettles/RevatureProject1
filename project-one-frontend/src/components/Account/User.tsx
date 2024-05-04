@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { UserInterface } from "../../interfaces/UserInterface"
 import axios from "axios";
+import "./Account.css"
 
 
 //For displaying users to a Manager, will allow them to promote employees, fire employees, and view an naviagte to reimbursements
@@ -49,7 +50,7 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
 
     //this will render a view for the employee coming in as props
     return (
-        <div className="user-container">
+        <div className="user-root">
 
             { employed===true && <div>
 
@@ -64,18 +65,23 @@ export const User: React.FC<UserInterface> = (userState:UserInterface) => {
                     <div>
                         <span>Role: {user.role}</span> 
 
-                        {user.role === "USER" && <>
-                            <span> | Promote </span>
-                            <input type="checkbox" id="option1" name="options" value="option1"
-                            onChange={check1} />
+                        {user.role === "USER" && <div className="role">
 
-                            {checkbox1 && <button className="button" onClick={changeRole}>Confirm</button>}
-                        
-                            <span> | Fire </span>
-                            <input type="checkbox" id="option2" name="options" value="option2"
-                                onChange={check2} />
-                            {checkbox2 && <button className="button" onClick={deleteUser}>Confirm</button>}
-                        </>}
+                            <div className="promote">
+                                <span>Promote </span>
+                                <input type="checkbox" id="option1" name="options" value="option1"
+                                onChange={check1} />
+
+                                {checkbox1 && <button className="button" onClick={changeRole}>Confirm</button>}
+                            </div>
+
+                            <div className="fire">
+                                <span>Fire </span>
+                                <input type="checkbox" id="option2" name="options" value="option2"
+                                    onChange={check2} />
+                                {checkbox2 && <button className="button" onClick={deleteUser}>Confirm</button>}
+                            </div>
+                        </div>}
                     </div>
                 </div>
             </div>}

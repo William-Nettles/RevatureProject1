@@ -35,32 +35,26 @@ export const Account:React.FC = ()=>{
 
     
     return(
-       <div>
+       <div className="account-root">
 
+        <div className="account">
+
+        
+            <div className="button-container">
+                <button className="button" onClick={()=>{navigate("/reimbursements")}}>Reimbursement Portal</button>
+                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
+                <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
+            </div> 
         {state.userSessionData.userId > 0 ?
         <div className="account-container"> 
 
             <div className="header-container">
                 <h1>Account Information</h1>
-            </div>
-            
-            <div button-container>
-                <button className="button" onClick={()=>{navigate("/reimbursements")}}>Reimbursement Portal</button>
-                <button className="button" onClick={()=> {navigate("/logout")}}>Log Out</button>
-                <button className="button" onClick={()=> {navigate("/home")}}>Home</button>
-            </div>
-
-            <div className="account-container">
-                <div className="account-info">
-                    <h3>Username: {state.userSessionData.username}</h3>
                 </div>
-                <div className="account-info">
-                    <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
-                </div>
-                <div className="account-info">
-                    <h3>Role: {state.userSessionData.role}</h3>
-                </div>
-                
+            <div className="account-info">
+                <h3>Username: {state.userSessionData.username}</h3>
+                <h3>Name: {state.userSessionData.firstName} {state.userSessionData.lastName}</h3>
+                <h3>Role: {state.userSessionData.role}</h3>
             </div>
             
         </div> : <div className="account-container"> 
@@ -73,19 +67,25 @@ export const Account:React.FC = ()=>{
             
 
         </div>}
-
+        </div>
         <div>
 
             <div className="users-container">
 
             
             {state.userSessionData.role==="MANAGER" && <div className="manager-view">
-                <h1>All Users:</h1>
-                {userTemp.map((user, index) =>  
-                <div className="user-container">
-                    <User {...user}/>
+                <div className="all-users">
+                    <h1>All Users:</h1>
                 </div>
-            )}
+
+
+                <div className="users">
+                    {userTemp.map((user, index) =>  
+                    <div className="user-container">
+                        <User {...user}/>
+                    </div>
+                    )}
+                </div> 
                 
             </div>}
 
