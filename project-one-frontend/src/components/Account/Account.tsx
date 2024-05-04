@@ -41,7 +41,7 @@ export const Account:React.FC = ()=>{
         <div className="account-container"> 
 
             <div className="header-container">
-                <h2>Account Information</h2>
+                <h1>Account Information</h1>
             </div>
             
             <div button-container>
@@ -65,7 +65,7 @@ export const Account:React.FC = ()=>{
             
         </div> : <div className="account-container"> 
 
-            <h2>Please log in to view account information</h2>
+            <h1>Please log in to view account information</h1>
             <div className="button-container">
                 <button className="button" onClick={()=> {navigate("/home")}}>Back</button>
                 <button className="button" onClick={()=> {navigate("/")}}>Log In</button>
@@ -80,7 +80,7 @@ export const Account:React.FC = ()=>{
 
             
             {state.userSessionData.role==="MANAGER" && <div className="manager-view">
-                <h2>All Users:</h2>
+                <h1>All Users:</h1>
                 {userTemp.map((user, index) =>  
                 <div className="user-container">
                     <User {...user}/>
