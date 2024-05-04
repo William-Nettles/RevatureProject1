@@ -53,7 +53,6 @@ export const NewReim:React.FC = () => {
     return(
         <div>
             <div className="portal">
-                
                 <NavPanel/>
             </div> 
             <div className="NewReim">

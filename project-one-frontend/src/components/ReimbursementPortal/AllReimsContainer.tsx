@@ -36,8 +36,9 @@ export const AllReims:React.FC = ()=>{
 
     return(
        <div>
-        {/* <h2>Reimbursement Portal</h2> */}
-        <NavPanel/>
+            <div className="portal">
+                <NavPanel/>
+            </div> 
             <div>
                 <div>
                     <h2>Reimbursements:</h2>
