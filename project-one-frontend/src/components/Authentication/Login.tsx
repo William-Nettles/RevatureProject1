@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { state } from "../../globalData/store"
-import "./login.css"
+import "./Login.css"
 
 //component for login. Users can login or navigate to signup
 

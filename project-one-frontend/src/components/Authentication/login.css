@@ -8,7 +8,7 @@ body {
     align-items: center;
     min-height: 100vh;
     /* Add background image */
-    background-image: url("../../../public/office2.jpg");
+    background-image: url("../../../public/office1.jpg");
     /* Set background image properties */
     background-size: cover;
     /* background-position: center; */
